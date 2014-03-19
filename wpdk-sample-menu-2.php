@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Plugin Name:     WPDK Sample Menu #2
- * Plugin URI:      https://wpxtre.me
+ * Plugin URI:      http://wpdk.io
  * Description:     Hello World! in WordPress menu of admin area with WPDK framework - intermediate usage
  * Version:         1.0.0
  * Author:          wpXtreme
@@ -12,13 +13,15 @@
 
 // Include WPDK framework - the root directory name of WPDK may be different.
 // Please change the line below according to your environment.
-require_once( trailingslashit( dirname( dirname( __FILE__ ))) . 'wpdk-production/wpdk.php' );
+//require_once( trailingslashit( dirname( dirname( __FILE__ ) ) ) . 'wpdk-production/wpdk.php' );
+require_once( trailingslashit( dirname( dirname( __FILE__ ) ) ) . 'wpxtreme/wpdk/wpdk.php' );
 
 // Hook a function to the WordPress action that generates the Hello World menu item in admin menu
-add_action( 'admin_menu', 'wpdk_create_admin_menu_2' );
+add_action( 'admin_menu', 'wpdk_create_admin_menu' );
 
 // This function creates the Hello World menu item in admin menu through WPDK
-function wpdk_create_admin_menu_2() {
+function wpdk_create_admin_menu()
+{
 
   // Set my own plugin icon URL, shown in main navigation menu of WordPress Administration Screen
   $icon_menu = plugin_dir_url( __FILE__ ) . 'logo-16x16.png';
@@ -39,11 +42,11 @@ function wpdk_create_admin_menu_2() {
           // Menu item shown as first submenu in main navigation menu
           'menuTitle'      => __( 'Show Hello World' ),
           // The web page title shown when this item is clicked
-          'pageTitle'  => __( 'Hello World! wpdk sample plugin - Show Hello World!' ),
+          'pageTitle'      => __( 'Hello World! wpdk sample plugin - Show Hello World!' ),
           // WordPress capability needed to see this menu item - if current WordPress user does not have this capability, this menu item will be hidden
           'capability'     => 'manage_options',
           // Function called whenever this menu item is clicked
-          'viewController' => 'wpdk_display_hello_world_2',
+          'viewController' => 'wpdk_display_hello_world',
         ),
 
         // Add a divider to separate the first submenu item from the second
@@ -53,9 +56,9 @@ function wpdk_create_admin_menu_2() {
           // Menu item shown as second submenu in main navigation menu
           'menuTitle'      => __( 'Show About' ),
           // The web page title shown when this item is clicked
-          'pageTitle'  => __( 'Hello World! wpdk sample plugin - Show About' ),
+          'pageTitle'      => __( 'Hello World! wpdk sample plugin - Show About' ),
           // Function called whenever this menu item is clicked
-          'viewController' => 'wpdk_display_about_2',
+          'viewController' => 'wpdk_display_about',
         ),
       )
     )
@@ -67,11 +70,13 @@ function wpdk_create_admin_menu_2() {
 }
 
 // This function does nothing more than displays Hello World! in admin area when plugin menu item 'Show Hello World' is clicked in admin menu
-function wpdk_display_hello_world_2() {
-  echo '<h1>' . 'Hello World!' . '</h1>';
+function wpdk_display_hello_world()
+{
+  ?><h1>Hello World!</h1><?php
 }
 
 // This function displays a string in admin area when plugin menu item 'Show About' is clicked in admin menu
-function wpdk_display_about_2() {
-  echo '<h1 style="color:#000090">' . 'This is a WPDK sample plugin - about section - Thanks!' . '</h1>';
+function wpdk_display_about()
+{
+  ?><h1 style="color:#ff7b68">This is a WPDK sample plugin - about section - Thanks!</h1><?php
 }
